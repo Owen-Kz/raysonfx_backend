@@ -1,5 +1,6 @@
 <?php
 include "db.php";
+include "CORS-setup.php";
 session_start();
 
 unset($_SESSION["id"]);

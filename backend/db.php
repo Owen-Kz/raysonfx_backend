@@ -2,10 +2,10 @@
 
 require_once "./exportENV.php";
 
-$servername = $_ENV['DB_HOST'];
-$username = $_ENV['DB_USER'];
-$password = $_ENV['DB_PASS'];
-$db = $_ENV["DB_NAME"];
+$servername = $_ENV['DB_HOST_RAYSON'];
+$username = $_ENV['DB_USER_RAYSON'];
+$password = $_ENV['DB_PASS_RAYSON'];
+$db = $_ENV["DB_NAME_RAYSON"];
 
 
 
