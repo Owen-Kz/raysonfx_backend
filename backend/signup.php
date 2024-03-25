@@ -3,6 +3,7 @@
 include "db.php";
 include "CORS-setup.php";
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 session_start();
 // Get the JSON data from the POST request
 
@@ -62,6 +63,9 @@ if(isset($pass) && isset($email_post)&& isset($first_name) && isset($last_name) 
 echo json_encode($response);
     
 }
-
-
+} else {
+    // Return an error for unsupported request methods
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["status" => "error", "message" => "Method not allowed"]);
+}
 ?>
