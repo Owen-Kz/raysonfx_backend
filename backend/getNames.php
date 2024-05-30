@@ -1,4 +1,6 @@
 <?php
+include "./CORS-setup.php";
+
 include "./db.php";
 session_start();
 

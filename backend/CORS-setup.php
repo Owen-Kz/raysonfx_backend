@@ -2,6 +2,7 @@
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // You can decide if the origin in $_SERVER['HTTP_ORIGIN'] is something you want to allow, or as here, allow all
+    header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Max-Age: 86400');    // cache for 1 day
