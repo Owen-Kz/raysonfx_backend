@@ -1,6 +1,6 @@
 <?php
 
-include "./db.php";
+include "../db.php";
 session_start();
 // Get the JSON data from the POST request
 
@@ -10,14 +10,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $email_post = $data['email'];
 $pass = $data['password'];
 $username_post = $data['username'];
-$first_name  = $data["first_name"];
-$last_name = $data["last_name"];
-$country = $data["country"];
-$address = $data["address"];
-$state = $data["state"];
-$city = $data["city"];
-$zipCode = $data["zipCode"];
-$phonenumber = $data["password"];
+
 
 
 
@@ -27,9 +20,9 @@ $email = mysqli_real_escape_string($con, $email_post);
 $password = password_hash($pass, PASSWORD_DEFAULT);
 
 
-if(isset($pass) && isset($email_post) && isset($first_name) && isset($last_name) && isset($username_post)){
+if(isset($pass) && isset($email_post) && isset($username_post)){
 // CHeck if the user already exists
-    $stmt = $con->prepare("SELECT * FROM `user_data` WHERE `email` = ? OR `username` = ? ");
+    $stmt = $con->prepare("SELECT * FROM `administrators` WHERE `email` = ? OR `username` = ? ");
     $stmt->bind_param("ss", $email, $username_post);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -46,8 +39,8 @@ if(isset($pass) && isset($email_post) && isset($first_name) && isset($last_name)
     }
     else {
         // Create a NEw account if the user does not exist i.e record is not >  0
-        $stmt = $con->prepare("INSERT INTO `user_data` (`username`, `email`, `first_name`, `last_name`, `state`, `zip_code`, `city`, `phonenumber`, `country`, `address`, `password`) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssssss", $username_post, $email, $first_name, $last_name, $state,  $zipCode, $city, $phonenumber,  $country, $address, $password);
+        $stmt = $con->prepare("INSERT INTO `administrators` (`username`, `email`, `password`) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username_post, $email, $password);
 
 
         if($stmt->execute()){

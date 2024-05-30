@@ -1,6 +1,6 @@
 <?php
 
-include "db.php";
+include "../db.php";
 session_start();
 // Get the JSON data from the POST request
 
@@ -17,47 +17,45 @@ if(isset($pass) && isset($email_post)){
     
     // $password = $_POST["password"];
 
-    $stmt = $con->prepare("SELECT * FROM `user_data` WHERE `username` = ? OR `email` = ? AND verification_email != 'unverified' LIMIT 1");
+    $stmt = $con->prepare("SELECT *  FROM `administrators` WHERE `email` = ? OR `username` = ? LIMIT 1");
     $stmt->bind_param("ss", $userID, $userID);
     
     if($stmt->execute()){
 
     $result = $stmt->get_result();
-    
-    // $run_query = mysqli_query($con,$sql);
-    $run_query = $result;    
-    $count = mysqli_num_rows($run_query);
-    
+
+    $count = mysqli_num_rows($result);
+
    
 	//if user record is available in database then $count will be equal to 1
-
-	if($count == 1){
+	if($count == 1){ 
         // Get and verify the users password if the account exists  
-        $row = mysqli_fetch_array($run_query);
+        $row = mysqli_fetch_array($result);
         $storedHashedPassword = $row["password"];
+
         if((password_verify($pass, $storedHashedPassword)) ){
 
-        $_SESSION["user_id"] = $row["id"];
+        $_SESSION["admin_id"] = $row["id"];
     
-		$_SESSION["user_name"] = $row["username"];
+		$_SESSION["administrator"] = $row["username"];
 
-        $_SESSION["user_email"] = $row["email"];
+        $_SESSION["admin_email"] = $row["email"];
 
         $ip_add = getenv("REMOTE_ADDR"); 
 
         // $HOTEL =  $_SESSION["Hotel_name"];
-        $userLogin = array("user" => md5($row["email"]), "id" => md5($row["id"]));
+        $adminLogin = array("admin" => md5($row["email"]), "id" => md5($row["id"]));
 
-        $response = array('status' => 'success', 'message' => 'Logged in successfully', 'userData' => $userLogin);
+        $response = array('status' => 'success', 'message' => 'Logged in successfully', 'adminData' => $adminLogin);
         echo json_encode($response);
     }else{
-        $response = array('status' => 'error', 'message' => 'Invalid Credentials', 'userData' => "[]");
+        $response = array('status' => 'error', 'message' => 'Invalid Credentials', 'adminData' => "[]");
         echo json_encode($response);
     }
     
     }
     else {
-        $response = array('status' => 'error', 'message' => 'Invalid Login details provided / Email not verified ', 'userData' => '[]');
+        $response = array('status' => 'error', 'message' => 'Invalid Login details provided / Email not verified ', 'adminData' => '[]');
         echo json_encode($response);
     }
     
@@ -65,7 +63,7 @@ if(isset($pass) && isset($email_post)){
     echo "Error: " . $stmt->error;
 }
 }else{
-    $response = array('status' => 'error', 'message' => 'Fill all fields', 'userData' => '[]');
+    $response = array('status' => 'error', 'message' => 'Fill all fields', 'adminData' => '[]');
     echo json_encode($response);
 }
 

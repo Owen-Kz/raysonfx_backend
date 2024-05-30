@@ -1,12 +1,12 @@
 <?php
-include "db.php";
+include "../db.php";
 session_start();
 
-unset($_SESSION["id"]);
+unset($_SESSION["administrator"] );
 
-unset($_SESSION["user_name"]);
+unset($_SESSION["admin_id"]);
 
-unset($_SESSION["user_email"]);
+unset($_SESSION["admin_email"]);
 
 
 mysqli_close($con);
