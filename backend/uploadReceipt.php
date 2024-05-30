@@ -1,5 +1,6 @@
 <?php
-
+include 'cors.php';
+enableCORS();
 
 
 // Function to upload file to Cloudinary

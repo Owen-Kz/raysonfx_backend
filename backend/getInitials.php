@@ -1,5 +1,6 @@
 <?php
-
+include 'cors.php';
+enableCORS();
 function getInitials($fullname) {
     $words = explode(" ", $fullname); // Split the full name into an array of words
     $initials = ''; // Initialize variable to store initials

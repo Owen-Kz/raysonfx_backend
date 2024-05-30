@@ -1,4 +1,6 @@
 <?php
+include 'cors.php';
+enableCORS();
 include "db.php";
 session_start();
 

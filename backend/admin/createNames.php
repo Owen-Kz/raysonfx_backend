@@ -1,5 +1,6 @@
 <?php
-
+include '../cors.php';
+enableCORS();
 $data = json_decode(file_get_contents('php://input'), true);
 $adminId = $_GET["a_id"];
 
