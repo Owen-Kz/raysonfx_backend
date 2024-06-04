@@ -9,7 +9,7 @@ session_start();
 $transactionID = $_POST['transactionID'];
 $userID = $_POST['userID'];
 
-if(isset($_SESSION["administrator"])){
+if(isset($userID)){
 
     if(isset($transactionID) &&  isset($userID)){
         // Find Transaction Data 

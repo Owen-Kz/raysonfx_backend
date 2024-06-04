@@ -16,7 +16,7 @@ include "./validateAdmin.php";
 session_start();
 
 
-    $AdminCheck = "GetAdminInfo($adminId)";
+    $AdminCheck = GetAdminInfo($adminId);
     if($AdminCheck){
         
         $stmt = $con->prepare("SELECT * FROM `notify_names` WHERE `fullname` = ?  AND `amount` = ?  AND `transaction_type` = ? AND date_created BETWEEN (NOW() - INTERVAL 5 MINUTE) AND NOW()");

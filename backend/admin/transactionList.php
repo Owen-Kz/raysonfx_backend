@@ -16,7 +16,7 @@ if(isset($adminID)){
     $row = mysqli_fetch_array($run_query);
 
     $adminUSER = $row["username"];
-    if(isset($_SESSION["administrator"]) && $adminUSER){
+    if($adminUSER){
 
 
         $stmt = $con->prepare("SELECT * FROM `transactions` WHERE 1 ORDER BY `id` DESC");

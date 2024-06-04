@@ -4,10 +4,11 @@ enableCORS();
 include "../db.php";
 session_start();
 // Get the JSON data from the POST request
+$data = json_decode(file_get_contents('php://input'), true);
 
 // Access the values
-$email_post = $_SESSION["user_email"];
-$user_name = $_SESSION["user_name"];
+$email_post = $data["user_email"];
+$user_name = $data["user_name"];
 
 if(isset($email_post) || isset($user_name)){
 

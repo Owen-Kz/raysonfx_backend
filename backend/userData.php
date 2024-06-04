@@ -36,7 +36,7 @@ if(isset($userId)){
         $city = $row["city"];
         $phonenumber = $row["phonenumber"];
         
-        $email = $_SESSION["user_email"];
+        $email = $row["email"];
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 

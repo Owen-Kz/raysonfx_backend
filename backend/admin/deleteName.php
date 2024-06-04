@@ -6,7 +6,7 @@ session_start();
 
 
 $NameId = $_GET["id"];
-if(isset($_SESSION["admin_email"])){
+if($NameId){
     $stmt = $con->prepare("DELETE FROM `notify_names` WHERE md5(`id`) = ?");
     $stmt->bind_param("s", $NameId);
 
