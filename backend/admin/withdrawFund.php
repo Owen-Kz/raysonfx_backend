@@ -26,22 +26,28 @@ if(isset($amountToAdd) && isset($userID) ){
 
 		$row = mysqli_fetch_array($run_query);
 
-        $Balance = $row["current_balance"];
-        $username = $row["username"];
-        $NewBalance = $Balance - $amountToAdd ;
-        $TransactionType = "Withdrawal";
+    
         //if user record is available in database then $count will be equal to 1
         if($count > 0){
+
+            $username = $row["username"];
+
+            $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalcompleted` FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = mysqli_fetch_assoc($result);
+    
+            $Balance = $row["totalcompleted"];
+    
+            $NewBalance = $Balance - $amountToAdd ;
+            $TransactionType = "Withdrawal";
+
+
             if($amountToAdd > $Balance){
                 $response = array('status' => 'error', 'message' => 'Insufficient Funds');
                 echo json_encode($response);
             }else{
-
-            // Create a NEw account if the user does not exist i.e record is not >  0
-            $stmt = $con->prepare("UPDATE `user_data` SET `current_balance` = ? ");
-            $stmt->bind_param("s", $NewBalance);
-    
-            if($stmt->execute()){
 
                 $stmtTransaction = $con->prepare("INSERT INTO `transactions` (`amount`, `type`, `username`) VALUES (?,?,?)");
                 $stmtTransaction->bind_param("sss", $amountToAdd, $TransactionType, $username);
@@ -58,10 +64,8 @@ if(isset($amountToAdd) && isset($userID) ){
         
             echo json_encode($response);
     
-        }
-        else{
-            echo "Error: " . $stmt->error;
-        }
+
+   
     }
         }
         else {

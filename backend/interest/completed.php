@@ -35,20 +35,31 @@ if(isset($userId)){
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){
-
-        $result = $stmt->get_result();
+            $result = $stmt->get_result();
     
-        $count = mysqli_num_rows($run_query);
+            $count = mysqli_num_rows($run_query);    
     
         if($count > 0){
-            $transactionsList = array(); // Initialize an array to store all transactions
-
+     
         if ($row = $result->fetch_assoc()) {
             $completed = $row["totalcompleted"];
             // Loop through each row in the result set and append it to the transactionsList array
+            $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalWithdrawals` FROM `transactions` WHERE `username` =?  AND `type` = 'Withdrawal'");
+            $stmt->bind_param("s", $username);
+            if($stmt->execute()){
+                $res = $stmt->get_result();
+                $row = $res->fetch_assoc();
+                $totalWithdrawals = $row["totalWithdrawals"];
 
-            $response = array('status' => 'success', 'message' => 'completed Interest Transaction History', 'completed' => $completed);
+                $newInterestBalance = $completed - $totalWithdrawals;
+
+         
+            $response = array('status' => 'success', 'message' => 'completed Interest Transaction History', 'completed' => $newInterestBalance);
             echo json_encode($response);
+        }else{
+            $response = array('status' => 'error', 'message' => "Error: " . $stmt->error, 'completed' => '0');
+            echo json_encode($response);
+        }
         }
    
     
