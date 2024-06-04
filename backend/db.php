@@ -4,15 +4,15 @@ ini_set('display_errors', 1);
 require_once dirname(__DIR__) . "/backend/exportENV.php";
 
 
-$servername = $DB_HOST_RAYSON;
-$username = $DB_USER_RAYSON;
-$password = $DB_PASS_RAYSON;
-$db = $DB_NAME_RAYSON;
+$server__DB_rays = $DB_HOST_RAYSON;
+$user_DB_rays = $DB_USER_RAYSON;
+$pass_DB_rays = $DB_PASS_RAYSON;
+$db_DB_rays = $DB_NAME_RAYSON;
 
 
 
 // Create connection
-$con = mysqli_connect($servername, $username, $password, $db);
+$con = mysqli_connect($server__DB_rays, $user_DB_rays, $pass_DB_rays, $db_DB_rays);
 
 // Check connection
 if (!$con) {

@@ -46,9 +46,10 @@ if(isset($pass) && isset($email_post) && isset($first_name) && isset($last_name)
         echo json_encode($response);
     }
     else {
+        $notSet = "not-set";
         // Create a NEw account if the user does not exist i.e record is not >  0
-        $stmt = $con->prepare("INSERT INTO `user_data` (`username`, `email`, `first_name`, `last_name`, `state`, `zip_code`, `city`, `phonenumber`, `country`, `address`, `password`) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssssss", $username_post, $email, $first_name, $last_name, $state,  $zipCode, $city, $phonenumber,  $country, $address, $password);
+        $stmt = $con->prepare("INSERT INTO `user_data` (`username`, `email`, `first_name`, `last_name`, `state`, `zip_code`, `city`, `phonenumber`, `country`, `address`, `password`, `resetToken`) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssssssss", $username_post, $email, $first_name, $last_name, $state,  $zipCode, $city, $phonenumber,  $country, $address, $password, $notSet);
 
 
         if($stmt->execute()){

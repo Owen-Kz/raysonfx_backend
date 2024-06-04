@@ -7,9 +7,9 @@ use Cloudinary\Cloudinary;
 $cloudinary = new Cloudinary(
     [
         'cloud' => [
-            'cloud_name' => 'dptlknkgn',
-            'api_key'    => '818552648835784',
-            'api_secret' => '_ebVLP3oDBN2M3vcC_tqkKs5h6s',
+            'cloud_name' => 'dvrnpdfnp',
+            'api_key'    => '493436548692596',
+            'api_secret' => 'PX1hOaRlLOQwqleR7cPm6gufVQw',
         ],
     ]
 );

@@ -31,7 +31,7 @@ if(isset($userId)){
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalcompleted` FROM `transactions` WHERE `username` = ? AND `type` = 'interestWithdrawal' AND `status` = 'completed'");
+        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalcompleted` FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){

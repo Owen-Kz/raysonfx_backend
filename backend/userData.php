@@ -40,7 +40,7 @@ if(isset($userId)){
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT SUM(amount) AS 'totalInterest' FROM `transactions` WHERE `username` = ? AND `type` = 'interestDeposit' AND `status` = 'completed'");
+        $stmt = $con->prepare("SELECT SUM(amount) AS 'totalInterest' FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){
