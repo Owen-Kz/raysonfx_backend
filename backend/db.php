@@ -12,6 +12,7 @@ $db_DB_rays = $DB_NAME_RAYSON;
 
 
 // Create connection
+
 $con = mysqli_connect($server__DB_rays, $user_DB_rays, $pass_DB_rays, $db_DB_rays);
 
 // Check connection
