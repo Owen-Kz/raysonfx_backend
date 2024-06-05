@@ -11,16 +11,16 @@ $admin_id = $_GET["id"];
 if($admin_id){
     $stmt_admin  = $con->prepare("SELECT * FROM `administrators` WHERE md5(`id`) = ?");
     $stmt_admin->bind_param("s", $admin_id);
-    if(!$stmt){
+    if(!$stmt_admin){
         echo json_encode(array("message" => $con->error));
         throw new Exception("Error Preparing statment", $con->error);
     }
-    if(!$stmt->execute()){
+    if(!$stmt_admin->execute()){
         echo json_encode(array("message" => $con->error));
         throw new Exception("error Could not execute", $stmt->error);
     }else{
-        $result = $stmt->get_result();
-        $countAdmin = mysqli_num_rows($resultAdmin);
+        $result_admin = $stmt->get_result();
+        $countAdmin = mysqli_num_rows($result_admin);
 
         if($countAdmin > 0){
             $stmt = $con->prepare("SELECT * FROM `withdrawals` WHERE 1");
