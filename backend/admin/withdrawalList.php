@@ -19,7 +19,7 @@ if($admin_id){
         echo json_encode(array("message" => $con->error));
         throw new Exception("error Could not execute", $stmt->error);
     }else{
-        $result_admin = $stmt->get_result();
+        $result_admin = $stmt_admin->get_result();
         $countAdmin = mysqli_num_rows($result_admin);
 
         if($countAdmin > 0){
