@@ -11,7 +11,7 @@ if($NameId){
     $stmt->bind_param("s", $NameId);
 
     if($stmt->execute()){
-        header('Location: ../../foreman/names');
+        header('Location: https://raysonfinance.vercel.app/foreman/names');
     }else{
         $response = array("status" => "error", "messagae" => "Could Not Delete" . $stmt->error);
         echo json_encode($response);

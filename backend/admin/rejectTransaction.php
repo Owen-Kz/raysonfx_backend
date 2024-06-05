@@ -50,7 +50,7 @@ if(isset($userID)){
             
             $response = array("status" => "succsss", "message" => "Transaction Rejected Successfully");
             echo json_encode($response);
-            header('Location: ../../foreman/dashboard');
+            header('Location: https://raysonfinance.vercel.app/foreman/dashboard');
            }else{
             $response = array("status" => "error", "message" =>  "Error: " . $stmt->error);
            echo json_encode($response);
