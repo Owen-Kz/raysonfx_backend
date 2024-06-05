@@ -36,25 +36,43 @@ if(isset($userId)){
         $city = $row["city"];
         $phonenumber = $row["phonenumber"];
         
-        $email = $row["email"];
-        $username = $row["username"];
-        $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT SUM(amount) AS 'totalInterest' FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
-        $stmt->bind_param("s", $username);
-        
-        if($stmt->execute()){
+  $email = $row["email"];
+  $username = $row["username"];
+  $accountBalance = $row["current_balance"];
+  $INTEREST = 0;
 
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $totalInterest = $row["totalInterest"];
+  $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalcompleted` FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
+  $stmt->bind_param("s", $username);
+  
+  if($stmt->execute()){
+      $result = $stmt->get_result();
 
-        $INTEREST = 0;
-        if($totalInterest > 0){
-            $INTEREST = $totalInterest;
+      $count = mysqli_num_rows($run_query);    
+
+
+  if ($row = $result->fetch_assoc()) {
+      $completed = $row["totalcompleted"];
+      // Loop through each row in the result set and append it to the transactionsList array
+      $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalWithdrawals` FROM `transactions` WHERE `username` =?  AND `type` = 'Withdrawal'");
+      $stmt->bind_param("s", $username);
+      if($stmt->execute()){
+          $res = $stmt->get_result();
+          $row = $res->fetch_assoc();
+          $totalWithdrawals = $row["totalWithdrawals"];
+
+          $newInterestBalance = $completed - $totalWithdrawals;
+          if($newInterestBalance > 0){
+            $INTEREST = $newInterestBalance;
         }else{
             $INTEREST = 0;
         }
+
+      }
+    }else{
+            echo "Error: " . $stmt->error;
+    }
+        
         // $HOTEL =  $_SESSION["Hotel_name"];
         $user = array("username" => $username, "user_fullname" => $fullname, "account_balance" => $accountBalance, "totalInterest" => $INTEREST, "user_email" => $email, "Intitials" => getInitials($fullname), "firstname" => $firstname, "lastname" => $lastname, "phonenumber" => $phonenumber, "zip" => $zip, "city" => $city, "state" => "$state", "address" => $address, "country" => $country);
 
