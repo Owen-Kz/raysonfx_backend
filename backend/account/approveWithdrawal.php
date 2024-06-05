@@ -9,9 +9,9 @@ session_start();
 $transactionID = $_POST['transactionID'];
 $userID = $_POST['userID'];
 
-if($userID){
+if(isset($userID)){
 
-    if($transactionID &&  $userID){
+    if(isset($transactionID) &&  isset($userID)){
         // Find Transaction Data 
         $stmt = $con->prepare("SELECT * FROM `withdrawals` WHERE md5(`id`) = ? AND `username` = ?");
         $stmt->bind_param("ss", $transactionID, $userID);
