@@ -8,7 +8,7 @@ session_start();
 
 $admin_id = $_GET["id"];
 
-if(isset($admin)){
+if($admin){
     $stmt_admin  = $con->prepare("SELECT * FROM `administrators` WHERE md5(`id`) = ?");
     $stmt_admin->bind_param("s", $admin_id);
     if(!$stmt){
