@@ -9,18 +9,20 @@ session_start();
 $admin_id = $_GET["id"];
 
 if(isset($admin)){
-    $stmt  = $con->prepare("SELECT * FROM `administrators` WHERE md5(`id`) = ?");
-    $stmt->bind_param("s", $admin_id);
+    $stmt_admin  = $con->prepare("SELECT * FROM `administrators` WHERE md5(`id`) = ?");
+    $stmt_admin->bind_param("s", $admin_id);
     if(!$stmt){
+        echo json_encode(array("message" => $con->error));
         throw new Exception("Error Preparing statment", $con->error);
     }
     if(!$stmt->execute()){
+        echo json_encode(array("message" => $con->error));
         throw new Exception("error Could not execute", $stmt->error);
     }else{
         $result = $stmt->get_result();
-        $count = mysqli_num_rows($result);
+        $countAdmin = mysqli_num_rows($resultAdmin);
 
-        if($count > 0){
+        if($countAdmin > 0){
             $stmt = $con->prepare("SELECT * FROM `withdrawals` WHERE 1");
             if($stmt->execute()){
                 $result = $stmt->get_result();
@@ -51,4 +53,7 @@ if(isset($admin)){
             echo json_encode($response);
         }
     }
+}else{
+    $response = array("status" => "error", "message" => "ID NOT SET");
+    echo json_encode($response);
 }
