@@ -13,7 +13,7 @@ if(isset($userID)){
 
     if(isset($transactionID) &&  isset($userID)){
         // Find Transaction Data 
-        $stmt = $con->prepare("SELECT * FROM `withdrawals` WHERE md5(`id`) = ? AND `username` = ?");
+        $stmt = $con->prepare("SELECT * FROM `withdrawals` WHERE md5(`id`) = ? AND `user_id` = ?");
         $stmt->bind_param("ss", $transactionID, $userID);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -26,7 +26,7 @@ if(isset($userID)){
 
         if($count > 0){
             // Approve TRansaction if found 
-            $stmt = $con->prepare("UPDATE `withdrawals` SET `status` = 'rejected' WHERE md5(`id`) = ? AND `username` = ?");
+            $stmt = $con->prepare("UPDATE `withdrawals` SET `status` = 'rejected' WHERE md5(`id`) = ? AND `user_id` = ?");
             $stmt->bind_param("ss", $transactionID, $userID);
            if($stmt->execute()){
 
