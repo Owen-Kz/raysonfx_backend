@@ -31,7 +31,7 @@ if(isset($userId)){
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalPending` FROM `withdrawals` WHERE `username` = ? AND `status` = 'pending'");
+        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalPending` FROM `withdrawals` WHERE `user_id` = ? AND `status` = 'pending'");
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){

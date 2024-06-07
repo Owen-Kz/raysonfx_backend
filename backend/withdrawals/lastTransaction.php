@@ -31,7 +31,7 @@ if(isset($userId)){
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT `amount` FROM `transactions` WHERE `username` = ? AND `type` = 'depositWithdrawal' AND `status` = 'completed' ORDER BY `date` DESC LIMIT 1");
+        $stmt = $con->prepare("SELECT `amount` FROM `withdrawals` WHERE `user_id` = ? AND `status` = 'completed' ORDER BY `date` DESC LIMIT 1");
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){

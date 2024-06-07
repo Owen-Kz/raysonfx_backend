@@ -31,7 +31,7 @@ if(isset($userId)){
         $username = $row["username"];
         $accountBalance = $row["current_balance"];
 
-        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalRejected` FROM `transactions` WHERE `username` = ? AND `type` = 'depositWithdrawal' AND `status` = 'rejected'");
+        $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalRejected` FROM `withdrawals` WHERE `user_id` = ? AND `status` = 'rejected'");
         $stmt->bind_param("s", $username);
         
         if($stmt->execute()){
