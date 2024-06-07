@@ -40,7 +40,7 @@ if(isset($amountToAdd) && isset($userID) ){
 
                 $stmtTransaction->execute();
 
-            $response = array('status' => 'success', 'message' => 'Account Funded Succesfullt', 'statement' => $stmt, 'result' => $result);
+            $response = array('status' => 'success', 'message' => 'Account Funded Succesfully', 'statement' => $stmt, 'result' => $result);
             echo json_encode($response);
     
         }

@@ -2,6 +2,8 @@
 include '../cors.php';
 enableCORS();
 include "../db.php";
+include "../sendTransactionEmail.php";
+
 session_start();
 
 
@@ -37,6 +39,11 @@ if(isset($userID)){
             $run_query = $result;  
             $row = mysqli_fetch_array($run_query);
             $currentBalance = $row["current_balance"];
+            $userEmail = $row["email"];
+            $firstname = $row["firstname"];
+            $lastname = $row["lastname"];
+            $fullname = "$firstname $lastname";
+            
             
             if($transactionType === "deposit" || $transactionType === "depositWalletCredit" && $transactionType != "interestDeposit" && $transactionType != "interestCredit"){
             
@@ -46,12 +53,30 @@ if(isset($userID)){
                 $stmt->bind_param("ss", $newBalance, $userID);
                 $stmt->execute();
 
+
+                $year = date("Y");
+                $content = " 
+                <div><img src=https://res.cloudinary.com/dll8awuig/image/upload/v1717282518/raysonFinance_lg8whf.jpg width=100% alt=www.alphaforexlyfe.com></div>
+                <h1>Hi there, $firstname $lastname</h1>
+               
+                <h2>Your Deposit of <b>$amount</b> USD has been added to your wallet.</h2>
+                <p>Your New balance is:</p>
+                <p>
+                <button style='padding:10px 50px 10px 50px; display:flex; align-self:center; alignt-items:center; justify-self:center; background:dodgerblue; color:white; border:none; outline:none; border-radius:24px; text-align:center;  justfy-content:center;'>
+                $newBalance
+                </button></p>
+                <p>(c) $year . Rayson Finance</p>";
+                
+                SendTransactionEmail($userEmail, "Deposit Approved", $fullname, $content);
+
             }else{
                 $newBalance = $currentBalance - $amount;
 
                 $stmt = $con->prepare("UPDATE `user_data` SET `current_balance` = ? WHERE `username` = ? LIMIT 1");
                 $stmt->bind_param("ss", $newBalance, $userID);
                 $stmt->execute();
+
+
             }
 
 
