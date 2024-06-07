@@ -24,7 +24,8 @@ function SendTransactionEmail($receiver, $subject, $fullname, $emailContent) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json'
     ));
-    curl_setopt($ch, CURLOPT_CAINFO, $cacert); // Set the path to the certificate bundle
+    // curl_setopt($ch, CURLOPT_CAINFO, $cacert); // Set the path to the certificate bundle
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification
 
     // Execute cURL request and get the response
     $response = curl_exec($ch);
