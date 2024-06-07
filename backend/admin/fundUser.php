@@ -86,7 +86,7 @@ if (isset($amountToAdd) && isset($userID)) {
             </button></p>
             <p>(c) $year . Rayson Finance</p>";
             
-            SendTransactionEmail($userEmail, "Interest Added", $fullname, $content);
+            SendTransactionEmail($email, "Interest Added", $fullname, $content);
         }
 
         $response = array('status' => 'success', 'message' => 'Account Funded Succesfully', 'statement' => $stmt, 'result' => $result);
