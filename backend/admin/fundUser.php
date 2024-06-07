@@ -58,7 +58,7 @@ if (isset($amountToAdd) && isset($userID)) {
                 </button></p>
                 <p>(c) $year . Rayson Finance</p>";
                 
-                SendTransactionEmail($userEmail, "Deposit Alert", $fullname, $content);
+                SendTransactionEmail($email, "Deposit Alert", $fullname, $content);
 
             }else{
                 // $newBalance = $currentBalance - $amount;
