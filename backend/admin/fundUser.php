@@ -29,8 +29,8 @@ if (isset($amountToAdd) && isset($userID)) {
         $Balance = $row["current_balance"];
         $email = $row["email"];
         $NewBalance = $amountToAdd + $Balance;
-        $firstname = $row["firstname"];
-        $lastname = $row["lastname"];
+        $firstname = $row["first_name"];
+        $lastname = $row["last_name"];
         $fullname = "$firstname $lastname";
 
         // Create a NEw account if the user does not exist i.e record is not >  0

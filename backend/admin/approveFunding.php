@@ -40,8 +40,8 @@ if(isset($userID)){
             $row = mysqli_fetch_array($run_query);
             $currentBalance = $row["current_balance"];
             $userEmail = $row["email"];
-            $firstname = $row["firstname"];
-            $lastname = $row["lastname"];
+            $firstname = $row["first_name"];
+            $lastname = $row["last_name"];
             $fullname = "$firstname $lastname";
             
             
