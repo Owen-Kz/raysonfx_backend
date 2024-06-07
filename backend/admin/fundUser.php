@@ -32,6 +32,7 @@ if (isset($amountToAdd) && isset($userID)) {
         $firstname = $row["first_name"];
         $lastname = $row["last_name"];
         $fullname = "$firstname $lastname";
+        $formattedAmount = number_format($amountToAdd);
 
         // Create a NEw account if the user does not exist i.e record is not >  0
         if ($TransactionType === "depositWalletCredit") {
@@ -50,7 +51,7 @@ if (isset($amountToAdd) && isset($userID)) {
                 <div><img src=https://res.cloudinary.com/dll8awuig/image/upload/v1717282518/raysonFinance_lg8whf.jpg width=100% alt=www.alphaforexlyfe.com></div>
                 <h1>Hi there, $firstname $lastname</h1>
                 
-                <h2><b>$amountToAdd</b> USD has been added to your wallet.</h2>
+                <h2><b>$formattedAmount</b> USD has been added to your wallet.</h2>
                 <p>Your New balance is </p>
                 <p>
                 <button style='padding:10px 50px 10px 50px; display:flex; align-self:center; alignt-items:center; justify-self:center; background:dodgerblue; color:white; border:none; outline:none; border-radius:24px; text-align:center;  justfy-content:center;'>
@@ -75,15 +76,13 @@ if (isset($amountToAdd) && isset($userID)) {
 
         if($TransactionType === "interest" || $TransactionType === "Interest"){
             $year = date("Y");
+            $formattedAmount = number_format($amountToAdd);
             $content = " 
             <div><img src=https://res.cloudinary.com/dll8awuig/image/upload/v1717282518/raysonFinance_lg8whf.jpg width=100% alt=www.alphaforexlyfe.com></div>
             <h1>Hi there, $firstname $lastname</h1>
             
-            <h2><b>You have received $amountToAdd</b> USD Interest.</h2>
-            <p>
-            <button style='padding:10px 50px 10px 50px; display:flex; align-self:center; alignt-items:center; justify-self:center; background:dodgerblue; color:white; border:none; outline:none; border-radius:24px; text-align:center;  justfy-content:center;'>
-            Verify Email
-            </button></p>
+            <h3>You have received <b> $formattedAmount </b> USD Interest.</h3>
+ 
             <p>(c) $year . Rayson Finance</p>";
             
             SendTransactionEmail($email, "Interest Added", $fullname, $content);
