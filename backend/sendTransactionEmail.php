@@ -1,7 +1,7 @@
 <?php
 function SendTransactionEmail($receiver, $subject, $fullname, $emailContent, ){
     // Node.js endpoint URL
-$url = "https://asfischolar.org/api/email/external";
+$url = "https://asfischolar.org/email/external";
 
 // Email details
 $emailData = array(
