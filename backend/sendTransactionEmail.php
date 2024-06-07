@@ -28,7 +28,7 @@ $response = curl_exec($ch);
 // Check for errors
 if(curl_errno($ch)) {
     echo 'cURL error: ' . curl_error($ch);
-    return false;
+    // return false;
 } else {
     // Process the response
     echo 'Response: ' . $response;
@@ -38,5 +38,5 @@ if(curl_errno($ch)) {
 // Close cURL session
 curl_close($ch);
 }
-return true;
+// return true;
 
