@@ -12,7 +12,7 @@ function SendTransactionEmail($receiver, $subject, $fullname, $emailContent) {
     );
 
     // Path to the downloaded certificate bundle
-    $cacert = "/etc/ssl/certs/cacert.pem";
+    $cacert = "/var/www/html/cacert.pem";
 
     // Initialize cURL session
     $ch = curl_init($url);
