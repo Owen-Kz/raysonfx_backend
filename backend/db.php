@@ -4,10 +4,18 @@ ini_set('display_errors', 1);
 require_once dirname(__DIR__) . "/backend/exportENV.php";
 
 
-$server__DB_rays = $DB_HOST_RAYSON;
-$user_DB_rays = $DB_USER_RAYSON;
-$pass_DB_rays = $DB_PASS_RAYSON;
-$db_DB_rays = $DB_NAME_RAYSON;
+// $server__DB_rays = $DB_HOST_RAYSON;
+// $user_DB_rays = $DB_USER_RAYSON;
+// $pass_DB_rays = $DB_PASS_RAYSON;
+// $db_DB_rays = $DB_NAME_RAYSON;
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// require_once "exportENV.php";
+
+$server__DB_rays = $_ENV['DB_HOST'];
+$user_DB_rays = $_ENV['DB_USER'];
+$pass_DB_rays = $_ENV['DB_PASS'];
+$db_DB_rays = $_ENV["DB_NAME"];
 
 
 
