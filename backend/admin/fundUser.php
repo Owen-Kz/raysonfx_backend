@@ -1,8 +1,9 @@
 <?php
-include '../cors.php';
+include "../cors.php";
 enableCORS();
 include '../db.php';
-include "../sendTransactionEmail.php";
+session_start();
+include "../sendTransactionEmail.php"; 
 
 $data = json_decode(file_get_contents('php://input'), true);
 
