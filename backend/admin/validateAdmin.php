@@ -1,6 +1,6 @@
 <?php 
 include '../cors.php';
-enableCORS();
+// enableCORS();
 
 
 function GetAdminInfo($userId){

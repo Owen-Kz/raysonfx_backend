@@ -1,6 +1,6 @@
 <?php
 include '../cors.php';
-enableCORS();
+// enableCORS();
 include "../db.php";
 session_start();
 // Get the JSON data from the POST request

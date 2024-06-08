@@ -1,6 +1,6 @@
 <?php
 include 'cors.php';
-enableCORS();
+// enableCORS();
 
 // Function to upload file to Cloudinary
 include "./cloudinaryFileUpload.php";
