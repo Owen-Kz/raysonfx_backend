@@ -89,8 +89,9 @@ if (isset($amountToAdd) && isset($userID)) {
             SendTransactionEmail($email, "Interest Added", $fullname, $content);
         }
         header('Location: https://www.raysonfinance.org/foreman/dashboard');
-        $response = array('status' => 'success', 'message' => 'Account Funded Succesfully', 'statement' => $stmt, 'result' => $result);
-        echo json_encode($response);
+        echo 'Account Funded Succesfully';
+        // $response = array('status' => 'success', 'message' => 'Account Funded Succesfully', 'statement' => $stmt, 'result' => $result);
+        // echo json_encode($response);
     } else {
         $response = array('status' => 'error', 'message' => "Requested Account Does Not Exist $userID ");
         echo json_encode($response);
