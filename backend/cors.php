@@ -2,7 +2,7 @@
 function enableCORS() {
     // if (isset($_SERVER['HTTP_ORIGIN'])) {
         // Allow from any origin
-        header("Access-Control-Allow-Origin: 'https://www.raysonfinance.org");
+        header("Access-Control-Allow-Origin: https://www.raysonfinance.org");
         header('Access-Control-Allow-Credentials: true');
         header('Access-Control-Max-Age: 86400');    // cache for 1 day
     // }
