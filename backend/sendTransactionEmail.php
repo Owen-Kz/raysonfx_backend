@@ -32,9 +32,9 @@ function SendTransactionEmail($receiver, $subject, $fullname, $emailContent) {
 
     // Check for errors
     if (curl_errno($ch)) {
-        echo json_encode(array("status" => "error", "message" => 'cURL error: ' . curl_error($ch)));
+        // echo json_encode(array("status" => "error", "message" => 'cURL error: ' . curl_error($ch)));
     } else {
-        echo json_encode(array("status" => "emailSent", "message" => 'Response: ' . $response));
+        // echo json_encode(array("status" => "emailSent", "message" => 'Response: ' . $response));
     }
 
     // Close cURL session
