@@ -13,7 +13,7 @@ if(isset($fullname)){
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "../db.php";
 include "./validateAdmin.php";
-session_start();
+// session_start();
 
 
     $AdminCheck = GetAdminInfo($adminId);

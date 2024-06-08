@@ -27,7 +27,7 @@ if(isset($userId)){
 	if($count == 1){
         // Get and verify the users password if the account exists  
         $row = mysqli_fetch_array($run_query);
-        $email = $_SESSION["admin_email"];
+        $email = $row["email"];
         $username = $row["username"];
 
 
