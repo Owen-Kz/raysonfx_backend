@@ -1,6 +1,6 @@
 <?php
 include "./cors.php";
-enableCORS();
+// enableCORS();
 require '../vendor/autoload.php'; // If you're using Composer (recommended)
 
 require "./exportENV.php";
