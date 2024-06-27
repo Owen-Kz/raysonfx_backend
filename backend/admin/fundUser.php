@@ -29,7 +29,7 @@ if (isset($amountToAdd) && isset($userID)) {
         $row = mysqli_fetch_array($run_query);
         $Balance = $row["current_balance"];
         $email = $row["email"];
-        $NewBalance = $amountToAdd + $Balance;
+        $NewBalance = (int)$amountToAdd + (int)$Balance;
         $firstname = $row["first_name"];
         $lastname = $row["last_name"];
         $fullname = "$firstname $lastname";

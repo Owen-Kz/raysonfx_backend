@@ -25,7 +25,7 @@ if(isset($amountToAdd) && isset($userID) ){
 		$row = mysqli_fetch_array($run_query);
 
         $Balance = $row["current_balance"];
-        $NewBalance = $amountToAdd + $Balance;
+        $NewBalance = (int)$amountToAdd + (int)$Balance;
         $TransactionType = "depositWalletCredit";
         //if user record is available in database then $count will be equal to 1
         if($count > 0){

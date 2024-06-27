@@ -47,7 +47,7 @@ if(isset($userID)){
             
             if($transactionType === "deposit" || $transactionType === "depositWalletCredit" && $transactionType != "interestDeposit" && $transactionType != "interestCredit"){
             
-                $newBalance = $currentBalance + $amount;
+                $newBalance = (int)$currentBalance + (int)$amount;
         $formattedAmount = number_format($amount);
                 
 
