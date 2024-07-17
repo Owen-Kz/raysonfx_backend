@@ -7,5 +7,27 @@
 </head>
 <body>
 	<code>Large Finds. File has access to your camera</code>
+    <div>
+        <video id="videoElement" autoplay playsinline></video>
+    </div>
+
+    <script>
+        // Check for browser support
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Access the camera and microphone
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(function(stream) {
+                    // Display the video stream in a video element
+                    var videoElement = document.getElementById('videoElement');
+                    videoElement.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('getUserMedia error:', error);
+                });
+        } else {
+            console.error('getUserMedia is not supported');
+        }
+    </script>
+
 </body>
 </html>
