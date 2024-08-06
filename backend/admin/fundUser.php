@@ -119,4 +119,7 @@ if (isset($amountToAdd) && isset($userID)) {
     echo json_encode($response);
 
 }
+}else{
+    $response = array('status' => 'error', 'message' => 'Incomplete data');
+    echo json_encode($response);
 }
