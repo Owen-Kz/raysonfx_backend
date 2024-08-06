@@ -35,7 +35,7 @@ if (isset($amountToAdd) && isset($userID)) {
     // CHeck if the user already exists
 
     $stmt = $con->prepare("SELECT * FROM `user_data` WHERE `email` = ? OR `username` = ? ");
-    $stmt->bind_param("ss", $email, $userID);
+    $stmt->bind_param("ss", $userID, $userID);
     $stmt->execute();
     $result = $stmt->get_result();
     $run_query = $result;
@@ -78,7 +78,7 @@ if (isset($amountToAdd) && isset($userID)) {
                 </button></p>
                 <p>(c) $year . Rayson Finance</p>";
                 
-                SendTransactionEmail($email, "Deposit Alert", $fullname, $content);
+                // SendTransactionEmail($email, "Deposit Alert", $fullname, $content);
 
             }else{
                 // $newBalance = $currentBalance - $amount;
@@ -104,7 +104,7 @@ if (isset($amountToAdd) && isset($userID)) {
  
             <p>(c) $year . Rayson Finance</p>";
             
-            SendTransactionEmail($email, "Interest Added", $fullname, $content);
+            // SendTransactionEmail($email, "Interest Added", $fullname, $content);
         }
         // header('Location: https://www.raysonfinance.org/foreman/dashboard');
         // echo 'Account Funded Succesfully';
