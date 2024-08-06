@@ -97,8 +97,8 @@ class ComposerStaticInit90bbf95869b4e88bf0dc5022e708a458
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -139,6 +139,7 @@ class ComposerStaticInit90bbf95869b4e88bf0dc5022e708a458
     );
 
     public static $classMap = array (
+        'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaseSendGridClientInterface' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/BaseSendGridClientInterface.php',
         'Cloudinary\\Api\\Admin\\AdminApi' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Api/Admin/AdminApi.php',

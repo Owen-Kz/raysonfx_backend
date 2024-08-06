@@ -30,8 +30,9 @@ if(isset($amountToAdd) && isset($userID) ){
         //if user record is available in database then $count will be equal to 1
         if($count > 0){
             // Create a NEw account if the user does not exist i.e record is not >  0
-            $stmt = $con->prepare("UPDATE `user_data` SET `current_balance` = ? ");
-            $stmt->bind_param("s", $NewBalance);
+        
+            $stmt = $con->prepare("UPDATE `user_data` SET `current_balance` = ? WHERE `email` = ?");
+            $stmt->bind_param("ss", $NewBalance, $emai);
     
             if($stmt->execute()){
 

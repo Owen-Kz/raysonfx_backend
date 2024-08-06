@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AltoRouter' => $vendorDir . '/altorouter/altorouter/AltoRouter.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'BaseSendGridClientInterface' => $vendorDir . '/sendgrid/sendgrid/lib/BaseSendGridClientInterface.php',
     'Cloudinary\\Api\\Admin\\AdminApi' => $vendorDir . '/cloudinary/cloudinary_php/src/Api/Admin/AdminApi.php',
