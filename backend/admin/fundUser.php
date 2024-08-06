@@ -1,5 +1,5 @@
 <?php
-include "../cors.php";
+include __DIR__."../cors.php";
 // enableCORS(); 
 
 include '../db.php';
@@ -7,7 +7,7 @@ session_start();
 include "../sendTransactionEmail.php"; 
 
 $data = json_decode(file_get_contents('php://input'), true);
-
+if(isset($data)){
 // Access the values
 $amountToAdd = $data['amount'];
 $userID = $data['username'];
@@ -101,4 +101,5 @@ if (isset($amountToAdd) && isset($userID)) {
     $response = array('status' => 'error', 'message' => 'Incomplete data');
     echo json_encode($response);
 
+}
 }
