@@ -31,6 +31,8 @@ $userID = $data['username'];
 $TransactionType = $data["transactionType"];
 
 
+
+
 if (isset($amountToAdd) && isset($userID)) {
     // CHeck if the user already exists
 
@@ -44,7 +46,7 @@ if (isset($amountToAdd) && isset($userID)) {
 
     //if user record is available in database then $count will be equal to 1
     if ($count > 0) {
-        $row = mysqli_fetch_array($run_query);
+        $row = $result->fetch_assoc();
         $Balance = $row["current_balance"];
         $email = $row["email"];
         $NewBalance = (int)$amountToAdd + (int)$Balance;
@@ -108,7 +110,7 @@ if (isset($amountToAdd) && isset($userID)) {
         }
         // header('Location: https://www.raysonfinance.org/foreman/dashboard');
         // echo 'Account Funded Succesfully';
-        $response = array('status' => 'success', 'message' => 'Account Funded Succesfully', 'statement' => $stmt, 'result' => $result);
+        $response = array('status' => 'success', 'message' => "Account Funded Succesfully $userID", 'statement' => "stmt", 'result' => 'result');
         echo json_encode($response);
     } else {
         $response = array('status' => 'error', 'message' => "Requested Account Does Not Exist $userID ");
