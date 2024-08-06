@@ -59,7 +59,7 @@ if (isset($amountToAdd) && isset($userID)) {
         if ($TransactionType === "depositWalletCredit") {
 
             $stmt = $con->prepare("UPDATE `user_data` SET `current_balance` = ? WHERE `email` = ?");
-            $stmt->bind_param("ss", $NewBalance, $emai);
+            $stmt->bind_param("ss", $NewBalance, $email);
 
             if ($stmt->execute()) {
 
