@@ -6,9 +6,9 @@ include '../cors.php';
 // enableCORS();
 include "../db.php";
 // session_start();
-// $data = json_decode("php://input", true);
+$data = json_decode("php://input", true);
 
-$dataSite = $_POST["origin"];
+$dataSite = $data["origin"];
 
 if($dataSite){
 $stmt = $con->prepare("SELECT * FROM `site_settings` WHERE 1");
