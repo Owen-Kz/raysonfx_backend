@@ -26,7 +26,6 @@ print("eklk");
             $address = $row["address"];
             $eth_rate = $row["current_eth_rate"];
             $btc_rate = $row["current_btc_rate"];
-            echo $row;
 
             $response = array("status" => "success", "message" => "Site Data", 'address' => $address, "BTCWallet" => $btcWallet, "ETHWallet" => $ethWallet, "phonenumber" => $phonenumber, "btc_rate" => $btc_rate, "eth_rate" => $eth_rate);
             echo json_encode($response);
