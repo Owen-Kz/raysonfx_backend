@@ -2,7 +2,7 @@
 include '../cors.php';
 // enableCORS();
 include "../db.php";
-session_start();
+// session_start();
 
 // CHeck if the user already exists
     $stmt = $con->prepare("SELECT * FROM `site_settings` WHERE 1");
@@ -10,6 +10,7 @@ session_start();
     if(!$stmt){
         $response = array("status" => "error", "message" => $stmt->error);
         echo json_encode($response);
+        exit;
     }
     $stmt->execute();
     $result = $stmt->get_result();
