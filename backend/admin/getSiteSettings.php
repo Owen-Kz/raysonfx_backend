@@ -7,6 +7,10 @@ session_start();
 // CHeck if the user already exists
     $stmt = $con->prepare("SELECT * FROM `site_settings` WHERE 1");
     // $stmt->bind_param("ss", $email, $username_post);
+    if(!$stmt){
+        $response = array("status" => "error", "message" => $stmt->error);
+        echo json_encode($response);
+    }
     $stmt->execute();
     $result = $stmt->get_result();
     $run_query = $result;
