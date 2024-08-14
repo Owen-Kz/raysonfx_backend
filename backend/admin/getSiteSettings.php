@@ -8,7 +8,7 @@ include "../db.php";
 // session_start();
 $data = json_decode("php://input", true);
 
-$dataSite = $data["origin"];
+$dataSite = $data;
 
 if($dataSite){
 $stmt = $con->prepare("SELECT * FROM `site_settings` WHERE 1");
