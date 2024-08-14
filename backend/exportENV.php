@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ .'/../vendor/autoload.php';
+require_once '/home/wepeugsn/repositories/yada/vendor/autoload.php';
 
 
 // Load environment variables from .env in local development
