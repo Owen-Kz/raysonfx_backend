@@ -12,11 +12,10 @@ include "../db.php";
         echo json_encode($response);
         exit;
     }
-    $stmt->execute();
+    if($stmt->execute()){
     $result = $stmt->get_result();
-    $run_query = $result;
     // $run_query = $result;    
-    $count = mysqli_num_rows($run_query);
+    $count = $result->num_rows;
     if($count > 0){        
             $row = mysqli_fetch_array($result);
 
@@ -34,3 +33,7 @@ include "../db.php";
         $response = array("status" => "error", "message" => "NoDataAvailable");
         echo json_encode($response);
     }
+}else{
+    $response = array("status" => "error", "message" => "NoDataAvailable");
+    echo json_encode($response);
+}
