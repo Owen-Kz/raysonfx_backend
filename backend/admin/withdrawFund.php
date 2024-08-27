@@ -7,7 +7,7 @@ include '../db.php';
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Access the values
-$amountToAdd = $data['amount'];
+$amountToAdd = (int)$data['amount'];
 $walletAddress = $data['walletAddress'];
 $gateway = $data["gateway"];
 $userID = $data['user_id'];
@@ -31,23 +31,43 @@ if(isset($amountToAdd) && isset($userID) ){
         if($count > 0){
 
             $username = $row["username"];
+            $INTEREST = 0;
 
             $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalcompleted` FROM `transactions` WHERE `username` = ? AND `type` = 'interest' AND `status` = 'completed'");
             $stmt->bind_param("s", $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = mysqli_fetch_assoc($result);
+            
+            if($stmt->execute()){
+                $result = $stmt->get_result();
+          
+                $count = mysqli_num_rows($run_query);    
+          
+          
+            if ($row = $result->fetch_assoc()) {
+                $completed = $row["totalcompleted"];
+            $stmt = $con->prepare("SELECT SUM(`amount`) AS `totalWithdrawals` FROM `transactions` WHERE `username` =?  AND `type` = 'Withdrawal'");
+            $stmt->bind_param("s", $username);
+            if($stmt->execute()){
+                $res = $stmt->get_result();
+                $row = $res->fetch_assoc();
+                $totalWithdrawals = $row["totalWithdrawals"];
+      
+                $newInterestBalance = $completed - $totalWithdrawals;
+                if($newInterestBalance > 0){
+                  $INTEREST = $newInterestBalance;
+              }else{
+                  $INTEREST = 0;
+              }
     
-            $Balance = $row["totalcompleted"];
+            $Balance = $INTEREST;
     
-            $NewBalance = $Balance - $amountToAdd ;
+            $NewBalance = $INTEREST - $amountToAdd ;
             $TransactionType = "Withdrawal";
 
 
             if($amountToAdd > $Balance){
                 $response = array('status' => 'error', 'message' => 'Insufficient Funds');
                 echo json_encode($response);
-            }else{
+            }else if($Balance > 0 && $amountToAdd <= $Balance){
 
                 $stmtTransaction = $con->prepare("INSERT INTO `transactions` (`amount`, `type`, `username`) VALUES (?,?,?)");
                 $stmtTransaction->bind_param("sss", $amountToAdd, $TransactionType, $username);
@@ -58,7 +78,7 @@ if(isset($amountToAdd) && isset($userID) ){
 
                     $stmtWithdraw->execute();
     
-                    $response = array('status' => 'success', 'message' => 'WIthdrawal Succesful, Check withdrawal History for status', 'statement' => $stmt, 'result' => $result);
+                    $response = array('status' => 'success', 'message' => "WIthdrawal Successful, Check withdrawal History for status.", 'statement' => $stmt, 'result' => $result);
                 }
 
         
@@ -66,7 +86,13 @@ if(isset($amountToAdd) && isset($userID) ){
     
 
    
+    }else{
+        $response = array("status"=>'error', "message" => "Cannot withdraw at this time, please check the amount entered or contact our support team.");
+        echo json_encode($response);
     }
+    }
+}
+            }
         }
         else {
             $response = array('status' => 'error', 'message' => 'Requested Account Does Not Exist');
